@@ -29,7 +29,6 @@
 
 <body class="animated-content infobar-overlay">
 
-{% include "user/paperadmin/master/topnav.html" %}
 
 <div id="wrapper">
     <div id="layout-static">
@@ -41,7 +40,6 @@
         </div>
         {#    <div id="loader"></div>#}
         {% block sidebar %}
-            {% include "user/paperadmin/master/menu.html" %}
         {% endblock %}
 
         <div class="static-content-wrapper">
@@ -103,20 +101,6 @@
 
 {% include "user/paperadmin/master/scripts.html" %}
 {% block extrascript %}
-{% endblock %}
-{% block afterscript %}
-    <script>
-        $('#search-input').keypress(function (e) {
-            if (e.which == 13) {
-                var order_code = $('#search-input').val();
-                var url='{% url 'order:search_order_details' order_code="" %}'.slice(0,-1) + order_code + '/';
-                window.location = url;
-            }
-        });
-        $(window).on("load", function () {
-            $("#loading").style.display = "none";
-        });
-    </script>
 {% endblock %}
 </body>
 </html>

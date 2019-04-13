@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Installed apps
-    'django_tables2',
     # Internal apps
     'mailing',
 ]
@@ -63,7 +62,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR.child("templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,4 +131,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
+STATIC_ROOT = '/tmp/vconnect'
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    BASE_DIR.child("assets"),
+)
+

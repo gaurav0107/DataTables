@@ -1,0 +1,81 @@
+{% extends "user/paperadmin/master/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+    <li class="" xmlns="http://www.w3.org/1999/html"
+        xmlns="http://www.w3.org/1999/html"><a
+            href="#">Home</a></li>
+    <li class="active"><a
+            href="{% url 'mailing:show_data' %}">Cancelled</a>
+    </li>
+{% endblock %}
+{% block customstyle %}
+    <style>
+        .panel .panel-heading .nav-tabs {
+            float: left;
+        }
+        .table thead th  {
+            text-align: left;
+            font-size: 12px;
+        }
+        .table tbody td {
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .px {
+            padding-right: 100px;
+        }
+
+        .scrollable {
+            height: 100%;
+        }
+
+        .row-hover:hover {
+            background-color: #e1e1e1 !important;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+
+{% block heading %}
+    <h1 class="bg-white content-heading bshipment-bottom">Cancelled Items</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading no-padding-right" style="display: inline-block">
+{#            <h2>{% include "user/top_nav.html" with tab="canceled" %}</h2>#}
+        </div>
+        <div class="panel-body">
+            {% include 'pagination.html' %}
+            {% include "search.html" %}
+            <div class="panel panel-primary">
+    <div class="panel-body" style="overflow-x: scroll;">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-bordered table-bshipmented custom-datatable">
+                    <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>value</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for person in persons %}
+                        <tr>
+                            <td>{{ person.name }}</td>
+                            <td>{{ person.value }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+        {% include 'pagination.html' %}
+        </div>
+    </div>
+{% endblock %}
