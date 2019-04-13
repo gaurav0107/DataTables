@@ -1,0 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Pycharm config files
+.idea/
+
+# Secrets file
+secrets.json
+
+# Virtual Environment
+venv

@@ -1,0 +1,92 @@
+{% load static %}
+<style>
+    .sidebar-bluegray {
+        background-color: #343C5C !important;
+    }
+
+    .sidebar-bluegray nav.widget-body > ul.acc-menu li a {
+        background-color: #343C5C !important;
+    }
+
+    .sidebar-bluegray nav.widget-body > ul.acc-menu .badge {
+        text-transform: uppercase;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-size: 9px;
+        background: #22A7F0 !important;
+        left: auto !important;
+        right: 20px !important;
+    }
+</style>
+<div class="static-sidebar-wrapper sidebar-bleachedcedar">
+    <div class="static-sidebar">
+        <div class="sidebar">
+            <div class="widget" id="widget-profileinfo">
+                <div class="widget-body">
+                    <div class="userinfo ">
+                        <div class="avatar pull-left">
+                            <img src="https://s3-ap-southeast-1.amazonaws.com/overcart.media/User-blue.png"
+                                 class="img-responsive img-circle">
+                        </div>
+                        <div class="info">
+                            <span class="username"
+                                  style="color: #2c7ea2">{{ request.session.username }}</span>
+                            <span class="useremail"
+                                  style="color: #2c7ea2">{{ request.session.email_address }}</span>
+                        </div>
+
+                        <div class="acct-dropdown clearfix dropdown">
+                            <span class="pull-left"><span
+                                    class="online-status online"></span>Online</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget stay-on-collapse" id="widget-sidebar">
+                <nav role="navigation" class="widget-body">
+                    <ul class="acc-menu">
+                        <li class="nav-separator"></li>
+                        <li><a class="withripple"
+                               href="{% url 'dashboard:dashboard' %}"><span
+                                class="icon"><i class="fa fa-bar-chart"></i></span><span>Dashboard</span></a>
+                        </li>
+                        <li><a class="withripple"
+                               href="javascript:void(0);"><span
+                                class="icon"><i class="fa fa-cube"></i></span><span>Inventory</span><span
+                                class="badge">Coming Soon</span></a>
+                        </li>
+                        <li><a class="withripple"
+                               href="{% url 'pick_list:picking_single_item_orders' %}"><span
+                                class="icon"><i
+                                class="fa fa-shopping-cart"></i></span><span>Sales Orders</span></a>
+                        </li>
+                        <li><a class="withripple"
+                               href="{% url 'rto:initiate_rto' %}"><span
+                                class="icon"><i
+                                class="fa fa-refresh"></i></span><span>Returns</span></a>
+                        </li>
+
+                        <li><a class="withripple"
+                               href="javascript:void(0);"><span
+                                class="icon"><i
+                                class="fa fa-inbox"></i></span><span>Notifications</span><span class="badge">Coming Soon</span></a>
+                        </li>
+                        <li>
+                            <a class="withripple"
+                               href="javascript:void(0)"><span class="icon"><i
+                                    class="fa fa-gear"></i></span><span>Settings</span>
+                            </a>
+                            <ul class="acc-menu">
+                                <li><a class="withripple" style="padding-left: 40px"
+                                    href="{% url 'user:map_user_warehouse' %}"><span
+                                    class="icon"><i
+                                    class="fa fa-user"style="padding-right: 5px"></i></span><span>User Warehouse Mapping</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
