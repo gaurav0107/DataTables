@@ -1,0 +1,206 @@
+{% extends "user/paperadmin/master/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+    <li class="" xmlns="http://www.w3.org/1999/html"
+        xmlns="http://www.w3.org/1999/html"><a
+            href="#">Home</a></li>
+    <li class="active"><a
+            href="{% url 'user:map_user_warehouse' %}">User Warehouse
+        Mapping</a>
+    </li>
+{% endblock %}
+
+{% block customstyle %}
+    <style>
+        .panel .panel-heading .nav-tabs {
+            float: left;
+        }
+
+        .table thead th {
+            text-align: left;
+        }
+
+        .table tbody td {
+            text-align: left;
+        }
+
+        .table tbody tr {
+            text-align: left;
+        }
+
+        .px {
+            padding-right: 100px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block heading %}
+    <h1 class="bg-white content-heading border-bottom">User warehouse
+        mapping</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-primary">
+        <div class="panel-heading no-padding-right"
+             style="display: inline-block;">
+            <h2>
+                <ul class="nav nav-tabs" style="display: inline-block;">
+                    <li class="dropdown pull-right tabdrop hide"><a
+                            href="#"> </a>
+                        <ul class="dropdown-menu"></ul>
+                    </li>
+                    <li class="active">
+                        <a style="font-weight: 800"
+                           href="/user/map_user_warehouse">Mapping</a></li>
+                </ul>
+            </h2>
+        </div>
+        <form method="POST" action="" class="form-horizontal"
+              role="form">
+            {% csrf_token %}
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    <table style="width:60%">
+                        <tr>
+                            <td>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <select class="form-control"
+                                                    id="select_userid"
+                                                    name="user_id">
+                                                <option> Select Username
+                                                </option>
+                                                {% for user in users %}
+                                                    <option value="{{ user.user_id }}"
+                                                            {% if request.GET.user_id|slugify == user.user_id|slugify %}selected{% endif %}>{{ user.username }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            {% if unmapped_warehouses %}
+                                                <select class="form-control"
+                                                        id="add_warehouse"
+                                                        name="unmapped_warehouse_id">
+                                                    <option value="" selected>
+                                                        Add
+                                                        Warehouse
+                                                    </option>
+                                                    <option id="select"
+                                                            value="add_all">
+                                                        Select All
+                                                    </option>
+                                                    {% for warehouse in unmapped_warehouses %}
+                                                        <option value="{{ warehouse.warehouse_id }}"
+                                                                {% ifequal warehouse.warehouse_id|slugify add_warehouse|slugify %}selected="selected"{% endifequal %}>{{ warehouse.warehouse_code }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            {% if mapped_warehouses %}
+                                                <select class="form-control"
+                                                        id="remove_warehouse"
+                                                        name="mapped_warehouse_id">
+                                                    <option value=""> Remove
+                                                        Warehouse
+                                                    </option>
+                                                    <option id="remove"
+                                                            value="remove_all">
+                                                        Remove All
+                                                    </option>
+                                                    {% for warehouse in mapped_warehouses %}
+                                                        <option value="{{ warehouse.warehouse_id }}"
+                                                                {% ifequal warehouse.warehouse_id|slugify remove_warehouse|slugify %}selected="selected"{% endifequal %}>{{ warehouse.warehouse_code }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <br/>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="btn btn-primary btn-raised"
+                                        id="submit_button"
+                                        style="display: none"
+                                        onclick="selectAll()">
+                                    Submit
+                                    <div class="ripple-container"></div>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+{% block extrascript %}
+    <script>
+        $('#add_warehouse').on('change', function () {
+            var val = $(this).val();
+            if (val == null || val == "") {
+                $('#submit_button').hide();
+            }
+            else {
+                $('#submit_button').show();
+            }
+        });
+        $('#remove_warehouse').on('change', function () {
+            var val = $(this).val();
+            if (val == null || val == "") {
+                $('#submit_button').hide();
+            }
+            else {
+                $('#submit_button').show();
+            }
+        });
+        $('#select_userid').on('change', function () {
+            var selected_userid = $(this).val();
+            window.location.href = '{% url 'user:map_user_warehouse' %}' + '?user_id=' + selected_userid;
+        });
+        function selectAll() {
+            var val = $("#add_warehouse").val();
+            var warehouse_ids = [];
+            if (val == "add_all") {
+                {% for warehouse in unmapped_warehouses %}
+                    warehouse_ids.push("{{ warehouse.warehouse_id }}");
+                {% endfor %}
+                $("#add_warehouse  option[value=add_all]").attr('value', warehouse_ids);
+            }
+            var val1 = $("#remove_warehouse").val();
+            if (val1 == "remove_all") {
+                warehouse_ids = null;
+                var mapped_warehouse_ids = [];
+                {% for warehouse in mapped_warehouses %}
+                    mapped_warehouse_ids.push("{{ warehouse.warehouse_id }}");
+                {% endfor %}
+                $("#remove_warehouse  option[value=remove_all]").attr('value', mapped_warehouse_ids);
+            }
+        }
+        ;
+    </script>
+{% endblock %}
