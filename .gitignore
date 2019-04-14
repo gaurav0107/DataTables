@@ -6,7 +6,7 @@ __pycache__/
 .idea/
 
 # Secrets file
-secrets.json
+#secrets.json
 
 # Virtual Environment
 venv_vconnect
