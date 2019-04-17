@@ -7,8 +7,6 @@ urlpatterns = [
     # url(r'^$',
     #     views.send_mail,
     #     name="send_mail"),
-    url(r'^$',
-        views.show_data,
-        name="show_data")
-
+    url(r'^$', views.show_data, name="show_data"),
+    url(r'^login$', views.login, name="login")
 ]

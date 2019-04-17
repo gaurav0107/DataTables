@@ -26,3 +26,8 @@ def show_data(request):
         pageSize = 10
     data = methods.getData(pageSize, pageNum)
     return render(request, 'beam/show_data.html', context=data)
+
+
+@require_GET
+def login(request):
+    return render(request, 'user/login.html', context={})
