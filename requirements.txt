@@ -1,6 +1,7 @@
 Django==1.11.20
 #django-pyodbc-azure==1.11.15.0
 djangorestframework==3.9.2
-#pyodbc==4.0.26
+#gunicorn==19.9.0
+pyodbc==4.0.26
 pytz==2019.1
 Unipath==1.1
