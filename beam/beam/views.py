@@ -14,5 +14,15 @@ def send_mail(request):
 
 @require_GET
 def show_data(request):
-    data = methods.get_data()
+    pageSize = request.GET.get('limit', 10)
+    pageNum = request.GET.get('page', 1)
+    try:
+        pageNum = int(pageNum)
+    except:
+        pageNum = 1
+    try:
+        pageSize = int(pageSize)
+    except:
+        pageSize = 10
+    data = methods.getData(pageSize, pageNum)
     return render(request, 'beam/show_data.html', context=data)

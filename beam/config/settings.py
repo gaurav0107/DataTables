@@ -95,21 +95,6 @@ DATABASES = {
     }
 }
 
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'HOST': get_secret('DB_HOST'),
-#         'USER': get_secret('DB_USER'),
-#         'PASSWORD': get_secret('DB_PASSWORD'),
-#         'NAME': get_secret('DB_NAME'),
-#         'OPTIONS': {
-#             'sql_mode': 'traditional',
-#         }
-#     }
-# }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
