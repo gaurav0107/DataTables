@@ -3,5 +3,5 @@ from django.contrib import admin
 
 
 urlpatterns = [
-    url(r'^beam/', include('beam.urls', namespace='beam')),
+    url(r'^', include('beam.urls', namespace='beam')),
 ]
