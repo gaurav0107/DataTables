@@ -18,14 +18,11 @@
     }
     </style>
     <script>
-     document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.modal');
-        var instances = M.Modal.init(elems, options);
-        instances.open();
-     });
-     var instance = M.Modal.getInstance(elem);
-     instance.open();
-
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, options);
+    instances.open();
+  });
   // Or with jQuery
     </script>
 {% endblock %}
@@ -33,13 +30,12 @@
 <div class="row pull-right">
     <div class="col-md-20" id="category-search">
         <div class="form-group is-empty">
-            <a class="waves-effect waves-light customFilter modal-trigger" href="#modal1"><i class="material-icons customIcons left">search</i>Custom Search</a>
+            <a class="waves-effect waves-light customFilter" data-toggle="modal" data-target="#exampleModalCenter" ><i class="material-icons customIcons left">search</i>Custom Search</a>
         </div>
     </div>
 </div>
 
-
-  <!-- Modal Structure -->
+<!-- Modal Structure -->
   <div id="modal1" class="modal">
     <div class="modal-content">
       <h4>Modal Header</h4>
@@ -49,3 +45,45 @@
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
     </div>
   </div>
+
+{##}
+{##}
+{#<!-- Button trigger modal -->#}
+{#<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">#}
+{#  Launch demo modal#}
+{#</button>#}
+
+<!-- Modal -->
+<div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Custom Filter</h5>
+{#        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#          <span aria-hidden="true">&times;</span>#}
+{#        </button>#}
+      </div>
+      <div class="modal-body">
+         <!-- Dropdown Trigger -->
+  <!-- Dropdown Trigger -->
+  <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Drop Me!</a>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="#!">one</a></li>
+    <li><a href="#!">two</a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><a href="#!">three</a></li>
+    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+  </ul>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
