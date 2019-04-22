@@ -10,7 +10,6 @@ from unipath import Path
 
 BASE_DIR = Path(__file__).ancestor(2)
 
-
 with open(BASE_DIR.child("secrets.json")) as file:
     secrets = json.loads(file.read())
 
@@ -32,7 +31,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['13.127.104.121', 'localhost', '127.0.0.1']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,6 +43,7 @@ INSTALLED_APPS = [
     # Installed apps
     # Internal apps
     'beam',
+    'user',
     'rest_framework',
 ]
 
@@ -95,6 +94,19 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #     }
 # }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': get_secret('DB_HOST'),
+        'USER': get_secret('DB_USER'),
+        'PASSWORD': get_secret('DB_PASSWORD'),
+        'NAME': get_secret('DB_NAME'),
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
+    }
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -113,7 +125,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -127,7 +138,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
@@ -137,4 +147,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     BASE_DIR.child("assets"),
 )
-
