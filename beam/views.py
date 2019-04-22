@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -42,6 +43,8 @@ def login(request):
             request.session['user_id'] = validate_user['user_id']
             request.session['username'] = validate_user['username']
             request.session['email_address'] = validate_user['email_address']
+            messages.success(request, "Successfully Logged In")
             return redirect(reverse('beam:show_data'))
         else:
+            messages.error(request, "Invalid Username/Password")
             return render(request, 'beam/login.html', context={})
